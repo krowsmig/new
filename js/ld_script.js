@@ -1,0 +1,100 @@
+$(document).ready(function(){
+	
+	// reduce opacity of the whole contents 
+	$("#wrapper").css("opacity","0");
+	
+	// add classes to body for animation
+	$("body").addClass("no_y ld_1 ld_4 ld_none");
+	
+
+	// handle links with @href started with '#' only
+	$(document).on('click', 'a[href^="#"]', function(e) {
+	    // target element id
+	    var id = $(this).attr('href');
+
+	    // target element
+	    var $id = $(id);
+	    if ($id.length === 0) {
+	        return;
+	    }
+
+	    // prevent standard hash navigation (avoid blinking in IE)
+	    e.preventDefault();
+
+	    // top position relative to the document
+	    var pos = $id.offset().top;
+
+	    // animated top scrolling
+	    $('body, html').animate({scrollTop: pos});
+	});
+
+	$(window).scroll(function(){
+		// var roll = $('body').scrollTop(200);
+
+		if ($(window).scrollTop() >= 200) {
+			$("#wrapper").addClass("slide");
+			$(".top_btn").addClass("add_top");
+		} else {
+			$("#wrapper").removeClass("slide");
+			$(".top_btn").removeClass("add_top");
+			
+		}
+			// $("#wrapper").addClass("slide");
+
+	});
+
+	// hamburger button
+	$(".burger a").click(function(){
+		$("body").toggleClass("open");
+
+		return false;
+	});
+
+	// navigation button
+	$("nav").click(function(){
+		$("body").removeClass("open");
+
+	});
+
+
+	
+
+	// Close menu by pressing the ESC key.
+	$(document).keyup(function (e) {
+	  if ($('body').hasClass('open') && e.keyCode === 27) { // ESC
+	    $('body').removeClass('open');
+	  }
+	});
+
+	
+});
+
+$(window).on("load", function() {
+	// loading animtion
+	$("#wrapper").css("opacity","0");
+	setTimeout(function(){
+		$("#wrapper").css("opacity","1");
+	}, 1000);
+	setTimeout(function(){
+		$("body").addClass("ld_2");
+		$("body").removeClass("no_y");
+	}, 2000);
+
+	setTimeout(function(){
+		$("body").addClass("ld_3");
+		$("body").removeClass("ld_4");
+	}, 3000);
+
+
+	setTimeout(function(){
+		$("body").addClass("adjst");
+		$("body").removeClass("no_y");
+		$("body").removeClass("ld_none");
+		$("body").removeClass("ld_1");
+		$("body").removeClass("ld_2");
+		$("body").removeClass("ld_3");
+		$("body").removeClass("ld_4");
+	}, 4000);
+
+
+});
